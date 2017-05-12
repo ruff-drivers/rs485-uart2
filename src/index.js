@@ -11,13 +11,6 @@ module.exports = driver({
     attach: function (inputs) {
         var that = this;
         this._uart = inputs['uart'];
-
-        this._uart.on('data', function (data) {
-            that.emit('data', data);
-        });
-        this._uart.on('error', function (error) {
-            that.emit('error', error);
-        });
     },
     detach: function () {
         this._uart.close();
@@ -27,6 +20,13 @@ module.exports = driver({
             this._uart.setup(options, callback);
         },
         open: function () {
+            var that = this;
+            this._uart.on('data', function (data) {
+                that.emit('data', data);
+            });
+            this._uart.on('error', function (error) {
+                that.emit('error', error);
+            });
         },
         write: function (data, callback) {
             this._uart.write(data, callback);
