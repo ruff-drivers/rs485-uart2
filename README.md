@@ -38,7 +38,7 @@ $('#<device-id>').setup({
     dataBits: 8,
     parity: "even"
 }, callback);
-$('#<device-id>').open(callback);
+$('#<device-id>').on(event, callback);
 $('#<device-id>').write(data, callback);
 ```
 
@@ -54,6 +54,8 @@ Configure the arguments of the uart interface.
 
 Open the virtual rs485 bus.
 
+This method is **deprecated**.
+
 #### `write(data[, callback])`
 
 Write data to the rs485 bus.
@@ -65,6 +67,10 @@ Write data to the rs485 bus.
 #### `data`
 
 Emitted when data is received from rs485 bus.
+
+#### `error`
+
+Emitted when error happens.
 
 ## Contributing
 

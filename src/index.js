@@ -6,27 +6,27 @@
 'use strict';
 
 var driver = require('ruff-driver');
-var ReadStreaming = require('./read-streaming');
 
 module.exports = driver({
     attach: function (inputs) {
         var that = this;
         this._uart = inputs['uart'];
-        this._readStream = new ReadStreaming(this._uart);
 
-        this._readStream.on('data', function (data) {
+        this._uart.on('data', function (data) {
             that.emit('data', data);
+        });
+        this._uart.on('error', function (error) {
+            that.emit('error', error);
         });
     },
     detach: function () {
-        this._readStream.stop();
+        this._uart.close();
     },
     exports: {
         setup: function (options, callback) {
             this._uart.setup(options, callback);
         },
         open: function () {
-            this._readStream.start();
         },
         write: function (data, callback) {
             this._uart.write(data, callback);
