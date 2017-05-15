@@ -6,7 +6,7 @@ RS-485 driver with UART interface.
 
 ## Supported Engines
 
-* Ruff: >= 1.7.3 <2.0.0
+* Ruff: >= 1.9.0 <2.0.0
 
 ## Supported Models
 
@@ -37,8 +37,10 @@ Here is the basic usage of this driver.
 $('#<device-id>').setup({
     dataBits: 8,
     parity: "even"
-}, callback);
-$('#<device-id>').open();
+}, function () {
+    $('#<device-id>').open();
+});
+
 $('#<device-id>').write(data, callback);
 ```
 
