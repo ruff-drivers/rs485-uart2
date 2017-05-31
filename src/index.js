@@ -13,7 +13,6 @@ module.exports = driver({
         this._uart = inputs['uart'];
     },
     detach: function () {
-        this._uart.close();
     },
     exports: {
         setup: function (options, callback) {
